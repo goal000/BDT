@@ -1,0 +1,11 @@
+File  New  Java Project  Project Name as WordCount  Libraries
+  Add External Jars
+3. Open Terminal
+ cat > /home/cloudera/inputFile.txt
+--Enter words
+4. hdfs dfs -mkdir /inputnew
+hdfs dfs -put /home/cloudera/inputFile.txt /inputnew/
+5. hdfs dfs -cat /inputnew/inputFile.txt
+6. hadoop jar /home/cloudera/wordcount.jar WordCount
+/inputnew/inputFile.txt /output_new
+7. hdfs dfs -cat /output_new/part-r-00000
