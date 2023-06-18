@@ -1,0 +1,86 @@
+gprec dataset
+
+id:int
+name:chararray
+fee:int
+
+101,aaaa,5000
+102,bbbb,5000
+103,cccc,1200
+104,dddd,950
+
+Pig operators
+*************
+load, describe, foreach, filter
+
+1. a = load '/pig/gprec.txt' using PigStorage(',') as (id:int, name:chararray, fee:int);
+   dump a;
+
+2. describe a;
+
+3. b = foreach a generate name, fee;
+   dump b;
+
+4. c = filter a by fee==5000;
+   dump c;
+
+Set Operations
+**************
+
+student
+id, name, fee
+101, aaa, 500
+102, bbb, 120
+103, ccc, 152
+104, ddd, 120
+
+books
+id, bookname, cost
+101, zzz, 500
+102, xxx, 512
+103, yyy, 500
+103, vvv, 150
+
+load both the datasets into hadoop
+
+union:
+------
+data = union student, teacher;
+dump data;
+
+join
+-----
+self:
+-----
+a = join student by id, student1 by id;
+
+inner:
+------
+b = join student by id, books by id;
+
+left outer:
+-----------
+c = join student by id left outer, books by id;
+
+right outer:
+------------
+d = join student by id right, books by id;
+
+full outer:
+----------
+e = join student by id full outer, books by id;
+
+SORT Operations:
+****************
+
+a = load '/pig/books.txt' using PigStorage(',') as (id:int, bookname:chararray, cost:int);
+
+order by:
+--------
+b = order a by cost DESC;
+
+limit:
+------
+c = limit b 2;
+
+

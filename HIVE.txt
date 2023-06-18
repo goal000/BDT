@@ -1,0 +1,38 @@
+HIVE
+****
+Before executing run the following commands
+1. set hive.support.concurrency=true;
+2. set hive.txn.manager=org.apache.hadoop.hive.ql.lockmgr.DbTxnManager;
+3. set hive.enforce.bucketing=true;
+
+DDL COMMANDS
+************
+1. create
+
+create table student (rollno int, name string, cgpa float) clustered by (rollno) into 3 buckets stored as orc TBLPROPERTIES('transactional'='true');
+
+2. alter
+alter table student rename to Studentts;
+alter table student add columns (age int);
+
+3. drop
+drop table Studentts;
+
+DML COMMANDS
+************
+1. Insert into
+
+insert into student values (101, 'aaaa', 9.5)
+insert into student values (102, 'bbbb', 8.5)
+
+2. select 
+
+select * from student;
+
+3. update
+
+update student set cgpa=9.6 where rollno = 102;
+
+4. delete
+
+delete from student where rollno = 101;
